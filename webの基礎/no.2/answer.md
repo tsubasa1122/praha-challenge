@@ -26,4 +26,43 @@ curl -X POST 'https://httpbin.org/post' -H 'Content-Type: application/x-www-form
 
 ### curl に関するクイズを作成してください
 
+1. 'https://httpbin.org/get'のヘッダー情報のみをcurlコマンドを用いて取得しなさい。
+   下記のようなレスポンスが返ってくるはずです。
+
+```
+HTTP/2 200
+date: Wed, 30 Dec 2020 06:36:50 GMT
+content-type: application/json
+content-length: 255
+server: gunicorn/19.9.0
+access-control-allow-origin: *
+access-control-allow-credentials: true
+```
+
+2. curl コマンドでリクエストした時のヘッダー情報を確認したい時のオプションはなんでしょうか？
+
+3. 'https://httpbin.org/json'のレスポンスからtitleのデータだけを抜き出してください。
+   以下のようなレスポンスを抽出します。
+
+```
+ "title": "Wake up to WonderWidgets!",
+ "title": "Overview",
+"title": "Sample Slide Show"
+```
+
 ### postman に関するクイズを作成してください
+
+1. postman を用いて、'https://httpbin.org/basic-auth/user/password'のurlのBasic認証を通してください。(ユーザーID: user パスワード: password)
+   以下のようなレスポンスが返ってきます。
+
+```
+{
+  "authenticated": true,
+  "user": "user"
+}
+
+```
+
+2. postman で設定できる Environment 変数は、どのような時に利用されるでしょうか？
+3. Import 機能とはどのような機能でしょうか？また、Google Chrome の Copy as cURL 機能を用いて、'https://httpbin.org/json'のURLへのリクエストをImportしてpostman経由で叩いてみてください。
+   Copy as cURL 機能のやり方: https://tech.withsin.net/2018/02/02/chrome-copy-as-curl/
