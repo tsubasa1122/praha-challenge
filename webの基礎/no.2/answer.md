@@ -26,7 +26,7 @@ curl -X POST 'https://httpbin.org/post' -H 'Content-Type: application/x-www-form
 
 ### curl に関するクイズを作成してください
 
-1. 'https://httpbin.org/get'のヘッダー情報のみをcurlコマンドを用いて取得しなさい。
+1. 'https://httpbin.org/get' のヘッダー情報のみを curl コマンドを用いて取得しなさい。
    下記のようなレスポンスが返ってくるはずです。
 
 ```
@@ -41,7 +41,7 @@ access-control-allow-credentials: true
 
 2. curl コマンドでリクエストした時のヘッダー情報を確認したい時のオプションはなんでしょうか？
 
-3. 'https://httpbin.org/json'のレスポンスからtitleのデータだけを抜き出してください。
+3. 'https://httpbin.org/json' のレスポンスから title のデータだけを抜き出してください。
    以下のようなレスポンスを抽出します。
 
 ```
@@ -52,7 +52,7 @@ access-control-allow-credentials: true
 
 ### postman に関するクイズを作成してください
 
-1. postman を用いて、'https://httpbin.org/basic-auth/user/password'のurlのBasic認証を通してください。(ユーザーID: user パスワード: password)
+1. postman を用いて、'https://httpbin.org/basic-auth/user/password' の url の Basic 認証を通してください。(ユーザー ID: user パスワード: password)
    以下のようなレスポンスが返ってきます。
 
 ```
@@ -64,5 +64,5 @@ access-control-allow-credentials: true
 ```
 
 2. postman で設定できる Environment 変数は、どのような時に利用されるでしょうか？
-3. Import 機能とはどのような機能でしょうか？また、Google Chrome の Copy as cURL 機能を用いて、'https://httpbin.org/json'のURLへのリクエストをImportしてpostman経由で叩いてみてください。
+3. Import 機能とはどのような機能でしょうか？また、Google Chrome の Copy as cURL 機能を用いて、'https://httpbin.org/json' の URL へのリクエストを Import して postman 経由で叩いてみてください。
    Copy as cURL 機能のやり方: https://tech.withsin.net/2018/02/02/chrome-copy-as-curl/
