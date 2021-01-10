@@ -14,12 +14,12 @@
 
 ### www.hoge.com で発行されたクッキーは、www.api.hoge.com にも送信されるでしょうか？
 
-- Cookie の Domain 属性の設定によって変わります。Cookie 発行時に、Domain 属性に何も指定しない場合は Cookie を発行先と同一オリジンのみとなり、サブドメインは除外されるが、Domain 属性を直接指定した場合、省略時よりも制限が緩和され、サブドメインに対しても Cookie を送信するようになるためです。
+- Cookie の Domain 属性の設定によって変わります。Cookie 発行時に、Domain 属性に何も指定しない場合は Cookie を発行先と同一オリジンのみとなり、サブドメインは除外されます(www.hoge.com で発行された Cookie は、www.api.hoge.comに送信されない)が、Domain 属性を直接指定した場合、省略時よりも制限が緩和され、サブドメインに対しても Cookie を送信するようになります。
 
 （例）www.api.hoge.comにもCookieを送信したい場合、以下のようにSet-CookieのDomainに設定を行います。
 
 ```
-Set-Cookie: name=value; Domain=www.hoge.com;
+Set-Cookie: name=value; Domain=hoge.com;
 ```
 
 ### クッキーに Domain="hoge.com"を指定した場合、api.hoge.com にもクッキーは送信されるでしょうか？理由を説明してください
