@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PostMessageApp</title>
+</head>
+
+<body>
+  <!-- ngrokでホストしたurlに変える -->
+  <iframe id="ifrm" src="http://localhost:8083" style="display:none;"></iframe>
+
+  <script type="text/javascript">
+    // windowロードイベント
+    window.onload = function () {
+      // iframeのwindowオブジェクトを取得
+      var ifrm = document.getElementById('ifrm').contentWindow;
+
+      document.cookie = "name=なかのです";
+      alert(document.cookie)
+      // 外部サイトにメッセージを投げる
+      // ngrokでホストしたurlに変える
+      ifrm.postMessage("HELLO!", 'http://localhost:8083');
+    };
+
+    // メッセージ受信イベント
+    window.addEventListener('message', function (event) {
+      // ngrokでホストしたurlに変える
+      if (event.origin !== 'http://localhost:8083') return;
+      alert(document.cookie)
+      console.log(event.data); //'WORLD!'
+    }, false);
+  </script>
+</body>
+
+</html>
