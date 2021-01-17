@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PostMessageApp2</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+    // メッセージ受信イベント
+    window.addEventListener(
+      'message',
+      function (event) {
+        if (event.origin !== 'http://localhost:8082') return;
+        document.cookie = "name=なかのからの返答";
+        alert(event.data);
+
+        // メッセージ送信元のサイトに返答する
+        event.source.postMessage("WORLD!", event.origin);
+      },
+      false
+    );
+  </script>
+</body>
+
+</html>
