@@ -75,6 +75,41 @@ No.3：次の３つは同一生成元ポリシーが適用されますか？Java
 
 ## 課題 3(実装)
 
+cors-sample-app 以下に実装しました。
+sample-site(simple request と preflight request が送れるサイト)
+unauthorized-sample-site(許可されていないオリジンから request を送るサイト)
+
 ## 課題 4(成果物に関する質問)
 
 ### 作成した成果物に、試しに CURL で、「Simple request」に該当しない POST リクエストを送信してみましょう。果たして CURL からのリクエストを受けた時、CORS 制約は適用されるでしょうか？その理由を説明してください。
+
+postman のログ
+
+```
+POST / HTTP/1.1
+User-Agent: PostmanRuntime/7.26.8
+Accept: */*
+Cache-Control: no-cache
+Host: ngrockのurl
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Type: multipart/form-data; boundary=--------------------------274988376975826562797945
+Content-Length: 163
+----------------------------postman
+Content-Disposition: form-data; name="hoge"
+
+name
+----------------------------postman--
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://localhost:8081
+Content-Length: 29
+Content-Type: application/json; charset=utf-8
+Date: Thu, 21 Jan 2021 06:47:13 GMT
+Etag: W/"1d-3b5Lhtm8VJUoiq+WI5bTDEL2JJ8"
+Vary: Origin
+X-Powered-By: Express
+
+{"message":"Request Success"}
+```
+
+こちらのログをみても分かるように preflight request が送られずにリクエストが成功していることから、CURL では CORS の制約は適用されていません。CORS はブラウザの仕様のため、ブラウザ以外からのリクエストでは CORS の制約は適用されないためです。
