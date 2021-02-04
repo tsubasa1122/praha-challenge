@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSRF</title>
+</head>
+
+<body>
+  <form action="http://localhost/vulnerabilities/csrf/?" method="GET">
+    New password:<br />
+    <input type="password" AUTOCOMPLETE="off" name="password_new"><br />
+    Confirm new password:<br />
+    <input type="password" AUTOCOMPLETE="off" name="password_conf"><br />
+    <br />
+    <input type="submit" value="Change" name="Change">
+
+  </form>
+</body>
+
+</html>
