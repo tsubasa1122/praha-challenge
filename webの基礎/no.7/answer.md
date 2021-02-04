@@ -151,13 +151,13 @@ etag: W/"58367fc94c8cc1a6410e0f9685e627"
 x-cache: Hit from cloudfront
 ```
 
-HTML はブラウザでキャッシュせず、CloudFront 側で ETag を用いたキャッシュを行っていることが分かります。`immutable`属性も設定されているので、ユーザーがリロードしてリソース情報を再取得する際もローカルにリソースが flesh な状態でキャッシュされていた場合、ローカルのリソースを返すことが出来るようになっています。(※Google Chrome では、昔はリロードを行った際に`immutable`を指定していない場合、キャッシュの有効期限が切れていない時でもサーバーにリクエストを行う仕様になっていたみたいですが、現在はキャッシュされたリソースを使うようになっているみたいです。)
+HTML はブラウザでキャッシュせず、CloudFront 側で ETag を用いたキャッシュを行っていることが分かります。
+
+CSS や画像は`immutable`属性も設定されているので、ユーザーがリロードしてリソース情報を再取得する際もローカルにリソースが flesh な状態でキャッシュされていた場合、ローカルのリソースを返すことが出来るようになっています。(※Google Chrome では、昔はリロードを行った際に`immutable`を指定していない場合、キャッシュの有効期限が切れていない時でもサーバーにリクエストを行う仕様になっていたみたいですが、現在はキャッシュされたリソースを使うようになっているみたいです。)
 
 参考：
 [immutable について](https://blog.jxck.io/entries/2016-07-12/cache-control-immutable.html#%E4%B8%8D%E5%BF%85%E8%A6%81%E3%81%AA-conditional-get)
 [Chrome のリロードの仕様について](https://stackoverflow.com/questions/11245767/is-chrome-ignoring-cache-control-max-age)
-
-CSS や画像は
 
 ```
 cache-control: max-age=315360000, public, immutable
@@ -178,7 +178,7 @@ cache-control: no-cache, no-store, must-revalidate, pre-check=0, post-check=0
 ```
 
 キャッシュ防止の設定が入っていることが分かります。
-(※[NDM](https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Cache-Control#preventing_caching) ではキャッシュ防止には`no-store`だけを使用してくださいと記載されており、Twitter の設定は悪い例のように書かれています。[IPA](https://www.ipa.go.jp/security/awareness/vendor/programmingv2/contents/405.html) の資料には、複数選択しても構わないと書いてあります。)
+(※[NDM](https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Cache-Control#preventing_caching) ではキャッシュ防止には`no-store`だけを使用してくださいと記載されており、Twitter の設定は悪い例のように書かれています。[IPA](https://www.ipa.go.jp/security/awareness/vendor/programmingv2/contents/405.html) の資料には、複数選択しても構わないと書いてあります。どちらなんだろう？)
 
 各コンポーネントで使用されていると予測される JS のレスポンスは以下のようなレスポンスになっており、
 
