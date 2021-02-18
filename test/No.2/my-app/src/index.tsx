@@ -7,7 +7,7 @@ interface BoardProps {
   onClick: (i: number) => void;
 }
 
-interface SquareProps {
+export interface SquareProps {
   value: ISquare;
   onClick: () => void;
 }
@@ -19,7 +19,7 @@ interface HistoryElement {
 type History = HistoryElement[];
 type ISquare = 'X' | 'O' | null;
 
-const Square: React.FC<SquareProps> = ({ value, onClick }) => {
+export const Square: React.FC<SquareProps> = ({ value, onClick }) => {
   return (
     <button className="square" onClick={onClick}>
       {value}
@@ -27,7 +27,7 @@ const Square: React.FC<SquareProps> = ({ value, onClick }) => {
   );
 };
 
-const Board: React.FC<BoardProps> = ({ squares, onClick }) => {
+export const Board: React.FC<BoardProps> = ({ squares, onClick }) => {
   const renderSquare = (i: number) => (
     <Square value={squares[i]} onClick={() => onClick(i)} />
   );
@@ -53,7 +53,7 @@ const Board: React.FC<BoardProps> = ({ squares, onClick }) => {
   );
 };
 
-const Game: React.FC = () => {
+export const Game: React.FC = () => {
   const [history, setHistory] = useState<History>([
     {
       squares: Array<ISquare>(9).fill(null),
