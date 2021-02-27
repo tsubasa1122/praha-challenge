@@ -1,4 +1,4 @@
-import { Square, SquareProps } from '../index';
+import Square, { SquareProps } from './index';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
