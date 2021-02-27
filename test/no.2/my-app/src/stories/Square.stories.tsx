@@ -11,6 +11,6 @@ const Template: Story<SquareProps> = (args) => <Square {...args} />;
 
 export const DefaultSquare = Template.bind({});
 DefaultSquare.args = {
-  value: 'X',
+  value: '半',
   onClick: action('clicked'),
 };
