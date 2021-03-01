@@ -328,7 +328,7 @@ exports[`Storyshots Game Default Game 1`] = `
     className="game-info"
   >
     <div>
-      Next player: 半
+      Next player: X
     </div>
     <ol>
       <li>
@@ -348,6 +348,6 @@ exports[`Storyshots Square Default Square 1`] = `
   className="square"
   onClick={[Function]}
 >
-  半
+  X
 </button>
 `;

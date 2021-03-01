@@ -1,5 +1,5 @@
 body {
-  font: 14px "Century Gothic", Futura, sans-serif;
+  font: 14px 'Century Gothic', Futura, sans-serif;
   margin: 20px;
 }
 
@@ -10,7 +10,7 @@ ul {
 
 .board-row:after {
   clear: both;
-  content: "";
+  content: '';
   display: table;
 }
 
@@ -40,6 +40,12 @@ ul {
 .kbd-navigation .square:focus {
   background: #ddd;
 }
+
+/* Squareの中身を赤色にする */
+/* 
+.value {
+  color: #ff0000;
+} */
 
 .game {
   display: flex;

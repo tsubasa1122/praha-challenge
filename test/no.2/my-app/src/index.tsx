@@ -22,14 +22,14 @@ interface HistoryElement {
 }
 
 type History = HistoryElement[];
-type ISquare = '半' | '丁' | null;
+type ISquare = 'X' | '○' | null;
 type Players = [Player, Player];
-type Player = '半' | '丁';
+type Player = 'X' | '○';
 
 export const Square: React.FC<SquareProps> = ({ value, onClick }) => {
   return (
     <button className="square" onClick={onClick}>
-      {value}
+      <div className="value">{value}</div>
     </button>
   );
 };
@@ -121,11 +121,11 @@ export const Game: React.FC<GameProps> = ({ players, initHistory }) => {
 
 const initHistory: History = [
   {
-    squares: Array<ISquare>(9).fill(null),
+    squares: Array<ISquare>(12).fill(null),
   },
 ];
 
-const players: Players = ['半', '丁'];
+const players: Players = ['X', '○'];
 
 ReactDOM.render(
   <Game players={players} initHistory={initHistory} />,
