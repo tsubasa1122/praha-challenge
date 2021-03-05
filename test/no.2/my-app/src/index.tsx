@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 
-interface BoardProps {
+export interface BoardProps {
   squares: ISquare[];
   onClick: (i: number) => void;
 }
@@ -12,12 +12,19 @@ export interface SquareProps {
   onClick: () => void;
 }
 
+export interface GameProps {
+  initHistory: History;
+  players: Players;
+}
+
 interface HistoryElement {
   squares: ISquare[];
 }
 
 type History = HistoryElement[];
-type ISquare = 'X' | 'O' | null;
+type ISquare = 'X' | '○' | null;
+type Players = [Player, Player];
+type Player = 'X' | '○';
 
 export const Square: React.FC<SquareProps> = ({ value, onClick }) => {
   return (
@@ -53,14 +60,10 @@ export const Board: React.FC<BoardProps> = ({ squares, onClick }) => {
   );
 };
 
-export const Game: React.FC = () => {
-  const [history, setHistory] = useState<History>([
-    {
-      squares: Array<ISquare>(9).fill(null),
-    },
-  ]);
-  const [stepNumber, setStepNumber] = useState(0);
-  const [xIsNext, setXIsNext] = useState(true);
+export const Game: React.FC<GameProps> = ({ players, initHistory }) => {
+  const [history, setHistory] = useState<History>(initHistory);
+  const [stepNumber, setStepNumber] = useState<number>(0);
+  const [xIsNext, setXIsNext] = useState<boolean>(true);
 
   const handleClick = (i: number) => {
     const _history = history.slice(0, stepNumber + 1);
@@ -71,7 +74,7 @@ export const Game: React.FC = () => {
       return;
     }
 
-    squares[i] = xIsNext ? 'X' : 'O';
+    squares[i] = xIsNext ? players[0] : players[1];
 
     setHistory(history.concat([{ squares }]));
     setStepNumber(history.length);
@@ -87,7 +90,7 @@ export const Game: React.FC = () => {
 
   const winner = calculateWinner(current.squares);
 
-  const moves = history.map((step, move) => {
+  const moves = history.map((_step, move) => {
     const desc = move ? 'Go to move #' + move : 'Go to game start';
     return (
       <li key={move}>
@@ -100,7 +103,7 @@ export const Game: React.FC = () => {
   if (winner) {
     status = 'Winner: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Next player: ' + (xIsNext ? players[0] : players[1]);
   }
 
   return (
@@ -116,7 +119,18 @@ export const Game: React.FC = () => {
   );
 };
 
-ReactDOM.render(<Game />, document.getElementById('root'));
+const initHistory: History = [
+  {
+    squares: Array<ISquare>(9).fill(null),
+  },
+];
+
+const players: Players = ['X', '○'];
+
+ReactDOM.render(
+  <Game players={players} initHistory={initHistory} />,
+  document.getElementById('root')
+);
 
 function calculateWinner(squares: ISquare[]) {
   const lines = [
