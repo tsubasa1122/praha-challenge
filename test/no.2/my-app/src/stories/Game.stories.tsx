@@ -15,5 +15,5 @@ DefaultGame.args = {
       squares: Array(9).fill(null),
     },
   ],
-  players: ['半', '丁'],
+  players: ['X', '○'],
 };
