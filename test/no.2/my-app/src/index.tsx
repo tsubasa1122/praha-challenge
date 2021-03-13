@@ -28,7 +28,7 @@ type Player = 'X' | '○';
 
 export const Square: React.FC<SquareProps> = ({ value, onClick }) => {
   return (
-    <button className="square" onClick={onClick}>
+    <button className="square" onClick={onClick} data-e2e="square">
       <div className="value">{value}</div>
     </button>
   );
@@ -102,6 +102,8 @@ export const Game: React.FC<GameProps> = ({ players, initHistory }) => {
   let status;
   if (winner) {
     status = 'Winner: ' + winner;
+  } else if (current.squares.every((square) => square !== null)) {
+    status = 'Draw';
   } else {
     status = 'Next player: ' + (xIsNext ? players[0] : players[1]);
   }
@@ -112,7 +114,7 @@ export const Game: React.FC<GameProps> = ({ players, initHistory }) => {
         <Board squares={current.squares} onClick={handleClick} />
       </div>
       <div className="game-info">
-        <div>{status}</div>
+        <div data-e2e="status">{status}</div>
         <ol>{moves}</ol>
       </div>
     </div>
@@ -121,7 +123,7 @@ export const Game: React.FC<GameProps> = ({ players, initHistory }) => {
 
 const initHistory: History = [
   {
-    squares: Array<ISquare>(12).fill(null),
+    squares: Array<ISquare>(9).fill(null),
   },
 ];
 
