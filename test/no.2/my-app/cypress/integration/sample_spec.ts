@@ -1,6 +1,6 @@
 describe('Tic tac toeのテスト', () => {
   const sqlareData = '[data-e2e=square]';
-  const statusData = '[data-e2e=status';
+  const statusData = '[data-e2e=status]';
 
   beforeEach(() => {
     cy.visit('/');
