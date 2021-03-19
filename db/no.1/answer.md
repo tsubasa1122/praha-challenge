@@ -6,8 +6,12 @@
 
 実行したクエリは以下です。
 
-```
-SELECT CustomerID, COUNT(CustomerID) AS OrderCount FROM Orders
+```sql
+SELECT
+  CustomerID,
+  COUNT(CustomerID) AS OrderCount
+FROM
+  Orders
 WHERE  strftime('%Y', DATE(OrderDate)) = '1996'
 GROUP BY CustomerID
 HAVING OrderCount >= 3
@@ -28,21 +32,32 @@ http://mickindex.sakura.ne.jp/database/db_optimize.html#LocalLink-count
 参考：
 https://qiita.com/TomK/items/132831ab45e2aba822a8
 
-### 「一度の注文で、最大どれぐらいの注文詳細が紐づく可能性があるのか」調べる必要が生じました。過去最も多くの OrderDetail が紐づいた Order を取得してください。何個 OrderDetail が紐づいていたでしょうか？
+### 過去最も多くの OrderDetail が紐づいた Order を取得してください。
 
 実行したクエリは以下です。
 
-```
-SELECT OD.OrderID, MAX(OD.OrderDetailCount) AS MaxOrderDetailCount FROM
-(SELECT OrderDetails.OrderID, COUNT (OrderDetails.OrderDetailID) AS OrderDetailCount FROM OrderDetails
-INNER JOIN Orders ON Orders.OrderID = OrderDetails.OrderID
-GROUP BY OrderDetails.OrderID) AS OD
+```sql
+SELECT
+  OD.OrderID,
+  MAX(OD.OrderDetailCount) AS MaxOrderDetailCount
+FROM
+  (SELECT
+    OrderDetails.OrderID,
+    COUNT (OrderDetails.OrderDetailID) AS OrderDetailCount
+  FROM
+    OrderDetails
+  INNER JOIN Orders ON Orders.OrderID = OrderDetails.OrderID
+  GROUP BY OrderDetails.OrderID) AS OD
 ```
 
 以下でも書けました。分かりやすさは、こっちの方が良さそう。
 
-```
-SELECT OrderDetails.OrderID, COUNT(OrderDetails.OrderDetailID) AS OrderDetailCount FROM OrderDetails
+```sql
+SELECT
+  OrderDetails.OrderID,
+  COUNT(OrderDetails.OrderDetailID) AS OrderDetailCount
+FROM
+  OrderDetails
 INNER JOIN Orders ON Orders.OrderID = OrderDetails.OrderID
 GROUP BY OrderDetails.OrderID
 ORDER BY OrderDetailCount DESC
@@ -53,12 +68,16 @@ LIMIT 1;
 
 ![スクリーンショット](images/most_orders.png)
 
-### 「一番お世話になっている運送会社を教えて欲しい」と頼まれました。過去最も多くの Order が紐づいた Shipper を特定してみてください
+### 過去最も多くの Order が紐づいた Shipper を特定してみてください
 
 実行したクエリは以下です。
 
-```
-SELECT ShipperID, COUNT(OrderID) AS OrderCount FROM Orders
+```sql
+SELECT
+  ShipperID,
+  COUNT(OrderID) AS OrderCount
+FROM
+  Orders
 GROUP BY ShipperID
 ORDER BY OrderCount DESC;
 ```
@@ -67,14 +86,22 @@ ORDER BY OrderCount DESC;
 
 ![スクリーンショット](images/most_orders_shipper.png)
 
-### 「重要な市場を把握したい」と頼まれました。売上が高い順番に Country を並べてみましょう
+### 売上が高い順番に Country を並べてみましょう
 
 実行したクエリは以下です。
 
-```
-SELECT ROUND(SUM(PriceByOrders.TotalPriceByOrder)) AS Sales, Customers.Country FROM Orders
+```sql
+SELECT
+  ROUND(SUM(PriceByOrders.TotalPriceByOrder)) AS Sales,
+  Customers.Country
+FROM
+  Orders
 JOIN (
-  SELECT SUM(OrderDetails.Quantity * Products.Price) AS TotalPriceByOrder, OrderDetails.OrderID FROM OrderDetails
+  SELECT
+    SUM(OrderDetails.Quantity * Products.Price) AS TotalPriceByOrder,
+    OrderDetails.OrderID
+  FROM
+    OrderDetails
   JOIN Products ON OrderDetails.ProductID = Products.ProductID
   GROUP BY OrderID
 ) PriceByOrders ON PriceByOrders.OrderID = Orders.OrderID
@@ -91,10 +118,19 @@ ORDER BY Sales DESC;
 
 実行したクエリは以下です。
 
-```
-SELECT ROUND(SUM(PriceByOrders.TotalPriceByOrder)) AS Sales, strftime('%Y', DATE(Orders.OrderDate)) AS OrderYear, Customers.Country FROM Orders
+```sql
+SELECT
+  ROUND(SUM(PriceByOrders.TotalPriceByOrder)) AS Sales,
+  strftime('%Y', DATE(Orders.OrderDate)) AS OrderYear,
+  Customers.Country
+FROM
+  Orders
 JOIN (
-  SELECT SUM(OrderDetails.Quantity * Products.Price) AS TotalPriceByOrder, OrderDetails.OrderID FROM OrderDetails
+  SELECT
+    SUM(OrderDetails.Quantity * Products.Price) AS TotalPriceByOrder,
+    OrderDetails.OrderID
+  FROM
+    OrderDetails
   JOIN Products ON OrderDetails.ProductID = Products.ProductID
   GROUP BY OrderID
 ) PriceByOrders ON PriceByOrders.OrderID = Orders.OrderID
@@ -113,7 +149,7 @@ ORDER BY Country;
 
 下記のクエリを実行して、Junior カラムを新たに追加しました。
 
-```
+```sql
 ALTER TABLE Employees ADD COLUMN Junior boolean default false not null;
 ```
 
@@ -121,7 +157,7 @@ ALTER TABLE Employees ADD COLUMN Junior boolean default false not null;
 
 下記のクエリを実行して、Junior カラムの値を更新しました。
 
-```
+```sql
 UPDATE Employees
 SET Junior = true
 WHERE  strftime('%Y', DATE(BirthDate)) >= '1960';
@@ -137,7 +173,7 @@ WHERE  strftime('%Y', DATE(BirthDate)) >= '1960';
 
 下記のクエリを実行して、long_relation カラムを新たに追加しました。
 
-```
+```sql
 ALTER TABLE Shippers ADD COLUMN long_relation boolean default false not null;
 ```
 
@@ -145,14 +181,18 @@ ALTER TABLE Shippers ADD COLUMN long_relation boolean default false not null;
 
 下記のクエリを実行すると、ShipperID 別に Order の回数が分かります。(70 回以上は、ShipperID が 2 の運送会社)
 
-```
-SELECT *, COUNT(ShipperID) AS OrderCount FROM Orders
+```sql
+SELECT
+  *,
+  COUNT(ShipperID) AS OrderCount
+FROM
+  Orders
 GROUP BY ShipperID
 ```
 
 下記のクエリを実行して、long_relation カラムの値を更新しました。
 
-```
+```sql
 UPDATE Shippers
 SET long_relation = true
 WHERE ShipperID IN  (
@@ -168,14 +208,18 @@ HAVING COUNT(ShipperID)  >= 70
 
 下記のようなクエリでも問題なさそうな気がしたが、`Shippers.ShipperID`でエラーが出てしまい断念...。
 
-```
+```sql
 UPDATE Shippers
 SET long_relation = true
 FROM Shippers
 INNER JOIN (
-SELECT ShipperID, COUNT(ShipperID) AS OrderCount FROM Orders
-GROUP BY ShipperID
-HAVING OrderCount >= 70
+  SELECT
+    ShipperID,
+    COUNT(ShipperID) AS OrderCount
+  FROM
+    Orders
+  GROUP BY ShipperID
+  HAVING OrderCount >= 70
 ) AS Orders
 ON Orders.ShipperID = Shippers.ShipperID;
 ```
@@ -183,12 +227,16 @@ ON Orders.ShipperID = Shippers.ShipperID;
 参考：
 https://stackoverflow.com/questions/12225715/update-statement-using-join-and-group-by
 
-### 「それぞれの Employee が最後に担当した Order と、その日付を取得してほしい」と頼まれました。OrderID, EmployeeID, 最も新しい OrderDate
+### OrderID, EmployeeID, 最も新しい OrderDate
 
 実行したクエリは以下です。
 
-```
-SELECT EmployeeID, MAX(OrderDate) AS LatestOrderDate FROM Orders
+```sql
+SELECT
+  EmployeeID,
+  MAX(OrderDate) AS LatestOrderDate
+FROM
+  Orders
 GROUP BY EmployeeID;
 ```
 
@@ -202,7 +250,7 @@ GROUP BY EmployeeID;
 
 下記のクエリを実行して、`CustomerID`が 1 の CustomerName を null にしました。
 
-```
+```sql
 UPDATE Customers
 SET CustomerName = null
 WHERE CustomerID = 1;
@@ -212,8 +260,11 @@ WHERE CustomerID = 1;
 
 実行したクエリは以下です。
 
-```
-SELECT * FROM Customers
+```sql
+SELECT
+  *
+FROM
+  Customers
 WHERE CustomerName IS NOT null;
 ```
 
@@ -225,8 +276,11 @@ WHERE CustomerName IS NOT null;
 
 実行したクエリは以下です。
 
-```
-SELECT * FROM Customers
+```sql
+SELECT
+  *
+FROM
+  Customers
 WHERE CustomerName IS null;
 ```
 
@@ -234,7 +288,7 @@ WHERE CustomerName IS null;
 
 ![スクリーンショット](images/customer_without_name.png)
 
-- もしかすると、CustomerName が存在しないユーザーを取得するクエリを、このように書いた方がいるかもしれません。SELECT \* FROM Customers WHERE CustomerName = NULL;しかし残念ながら、これでは期待した結果は得られません。なぜでしょうか？
+- SELECT \* FROM Customers WHERE CustomerName = NULL;残念ながら、これでは期待した結果は得られません。なぜでしょうか？
   NULL は「データが全く存在しないこと」を示す概念のことであり、論理演算子では判別できないため、特別な構文を使う必要があります。
 
   参考：
@@ -246,7 +300,7 @@ WHERE CustomerName IS null;
 
 下記のクエリを実行して、EmployeeId=1 のレコードを削除しました。
 
-```
+```sql
 DELETE FROM Employees
 WHERE EmployeeID = 1;
 ```
@@ -255,8 +309,15 @@ WHERE EmployeeID = 1;
 
 実行したクエリは以下です。
 
-```
-SELECT Orders.OrderID, Orders.CustomerID, Employees.EmployeeID, Orders.OrderDate, Orders.ShipperID FROM Orders
+```sql
+SELECT
+  Orders.OrderID,
+  Orders.CustomerID,
+  Employees.EmployeeID,
+  Orders.OrderDate,
+  Orders.ShipperID
+FROM
+  Orders
 INNER JOIN Employees ON Employees.EmployeeID = Orders.EmployeeID;
 ```
 
@@ -268,8 +329,16 @@ INNER JOIN Employees ON Employees.EmployeeID = Orders.EmployeeID;
 
 実行したクエリは以下です。
 
-```
-SELECT Orders.OrderID, Orders.OrderID, Orders.CustomerID, Employees.EmployeeID, Orders.OrderDate, Orders.ShipperID FROM Orders
+```sql
+SELECT
+  Orders.OrderID,
+  Orders.OrderID,
+  Orders.CustomerID,
+  Employees.EmployeeID,
+  Orders.OrderDate,
+  Orders.ShipperID
+FROM
+  Orders
 LEFT OUTER JOIN Employees ON Employees.EmployeeID = Orders.EmployeeID
 WHERE Employees.EmployeeID IS null;
 ```
@@ -342,12 +411,17 @@ no.2：[w3schools](https://www.w3schools.com/sql/trysql.asp?filename=trysql_sele
 ![スクリーンショット](images/orders_offset.png)
 
 <details><summary>回答</summary>
-```
-SELECT * FROM Orders
+
+```sql
+SELECT
+  *
+FROM
+  Orders
 ORDER BY OrderDate DESC
 LIMIT 10
 OFFSET 20;
 ```
+
 </details>
 
 no.3：[w3schools](https://www.w3schools.com/sql/trysql.asp?filename=trysql_select_all)を用いて、`Products`テーブルの`ProductName`に`Queso`が含まれるデータを取得するクエリを教えてください。
@@ -357,8 +431,13 @@ no.3：[w3schools](https://www.w3schools.com/sql/trysql.asp?filename=trysql_sele
 ![スクリーンショット](images/like_products.png)
 
 <details><summary>回答</summary>
-```
-SELECT * FROM Products
+
+```sql
+SELECT
+  *
+FROM
+  Products
 WHERE ProductName LIKE '%Queso%';
 ```
+
 </details>
