@@ -19,8 +19,8 @@
 slow query log を出力することで、遅いクエリが指定されたファイルにログとして出力されるようになるため、そのクエリをピックアップして EXPLAIN などを使いながらインデックスが適切に使用されているかを確認し、クエリの修正もしくはカラムへのインデックスの追加を行うべきです。
 
 参考：
-https://qiita.com/katsukii/items/3409e3c3c96580d37c2b
-http://naoberry.com/tech/slowquery/
+https://qiita.com/katsukii/items/3409e3c3c96580d37c2b  
+http://naoberry.com/tech/slowquery/  
 https://www.dbonline.jp/sqlite/index/index1.html
 
 ### カーディナリティとは何でしょうか？
@@ -52,12 +52,12 @@ id はプライマリーキーなので、[セカンダリインデックス](ht
 通常のインデックス利用の場合、インデックスに保存されているデータを参照して、一致するデータを見つけたら、そのポインターを辿って実データを取り出す必要があるため、カバリングインデックスよりも若干遅くなる。
 
 参考：
-https://blog.kyanny.me/entry/20100920/1284992435
-https://yakst.com/ja/posts/2462
-http://nippondanji.blogspot.com/2010/10/innodb.html
-https://abicky.net/2018/03/25/141353/
-https://use-the-index-luke.com/ja/sql/clustering/index-only-scan-covering-index
-https://techlife.cookpad.com/entry/2017/04/18/092524
+https://blog.kyanny.me/entry/20100920/1284992435  
+https://yakst.com/ja/posts/2462  
+http://nippondanji.blogspot.com/2010/10/innodb.html  
+https://abicky.net/2018/03/25/141353/  
+https://use-the-index-luke.com/ja/sql/clustering/index-only-scan-covering-index  
+https://techlife.cookpad.com/entry/2017/04/18/092524  
 http://blog.livedoor.jp/sasata299/archives/51336006.html
 
 ## 課題２（実装）
