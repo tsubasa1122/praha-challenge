@@ -1,0 +1,42 @@
+@startuml
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "Manga" as Manga {
+  id : varchar <<PK>>
+  --
+  content : varchar
+}
+
+entity "Manga_Comments" as Manga_Comments {
+ (manga_id, comment_id): varchar <<PK>>
+  manga_id: varchar <<FK>>
+  comment_id: varchar <<FK>>
+}
+
+entity "Comment" as Comment {
+  id : varchar <<PK>>
+  --
+  text : varchar
+}
+
+entity "Novel_Commnets" as Novel_Commnets {
+ (novel_id, comment_id): varchar <<PK>>
+  novel_id: varchar <<FK>>
+  comment_id: varchar <<FK>>
+}
+
+entity "Novel" as Novel {
+  id : varchar <<PK>>
+  --
+  name : varchar
+}
+
+Manga ||..o{ Manga_Comments
+Manga_Comments }o..o| Comment
+Novel ||..o{ Novel_Commnets
+Novel_Commnets }o..o| Comment
+@enduml
