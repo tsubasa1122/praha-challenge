@@ -1,0 +1,28 @@
+@startuml
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "Post_Tagging" as post_tagging {
+ (post_id, tag_id) : varchar <<PK>>
+  post_id : varchar <<FK>>
+  tag_id : varchar <<FK>>
+}
+
+entity "Post" as post {
+  id : varchar <<PK>>
+  --
+  content : varchar
+}
+
+entity "Tag" as tag {
+  id : varchar <<PK>>
+  --
+  content : varchar
+}
+
+post_tagging |o..o{ post
+post_tagging |o..o{ tag
+@enduml
