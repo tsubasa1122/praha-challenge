@@ -1,0 +1,22 @@
+@startuml
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "Message" as Message {
+  id: varchar<<PK>>
+--
+  text: varchar
+}
+
+entity "ThreadMessage" as ThreadMessage {
+  id: varchar<<PK>>
+--
+  parent_message_id: varchar<<FK>>
+  text: varchar
+}
+
+Message ||..o{ ThreadMessage
+@enduml
