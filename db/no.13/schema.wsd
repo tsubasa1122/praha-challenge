@@ -1,0 +1,22 @@
+@startuml
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "Student" as Student {
+  id : varchar <<PK>>
+  --
+  status_id: varchar <<FK>>
+  name: varchar
+}
+
+entity "StudentStatus" as StudentStatus {
+  id: varchar <<PK>>
+  --
+  name: varchar
+}
+
+Student ||..|{ StudentStatus
+@enduml
