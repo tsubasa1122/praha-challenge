@@ -1,0 +1,31 @@
+@startuml
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "NewCustomer" as NewCustomer {
+  id : varchar <<PK>>
+  --
+  closed: boolean
+  closedAt: boolean
+}
+
+entity "AddSalesEvent" as AddSalesEvent {
+  id: varchar <<PK>>
+  --
+  new_customer_id: varchar <<FK>>
+  sales_method_id: varchar <<FK>>
+  created_at: date
+}
+
+entity "SalesMethod" as SalesMethod {
+  id: varchar <<PK>>
+  --
+  name: varchar
+}
+
+NewCustomer ||..o{ AddSalesEvent
+SalesMethod ||..o{ AddSalesEvent
+@enduml
