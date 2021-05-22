@@ -21,7 +21,7 @@ Entity OrderDetails {
   menu_id: varchar<<FK>>
   rice_size_id: varchar<<FK>>
   number: integer
-  without_wasabi: boolean
+  include_wasabi: boolean
   sum_price: integer
   created_at: date
 }

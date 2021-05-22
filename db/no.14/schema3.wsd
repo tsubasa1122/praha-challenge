@@ -21,7 +21,7 @@ Entity OrderDetails {
   menu_id: varchar<<FK>>
   rice_size_id: varchar<<FK>>
   number: integer
-  without_wasabi: boolean
+  include_wasabi: boolean
   sum_price: integer
   created_at: date
 }
@@ -59,7 +59,8 @@ Entity RecommendMenus {
   id: varchar
   --
   title: varchar
-  publication_period: date
+  start_at: date
+  end_at: date
 }
 
 Entity AddRecommendMenus {

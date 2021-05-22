@@ -90,7 +90,7 @@ TABLE OrderDetails {
   order_id: varchar<<FK>>
   menu_id: varchar<<FK>>
   number: integer
-  without_wasabi: boolean
+  include_wasabi: boolean
   sum_price: integer
 }
 
@@ -99,7 +99,7 @@ TABLE Menus {
   category_id: varchar<<FK>>
   name: varchar
   price: integer
-  price_including_tax: integer
+  price_including_tax: integer -- (税率は別テーブルに切り出した方が良い)
   classification: integer -- (単品: 0, セット: 1)
 }
 
@@ -169,7 +169,8 @@ https://suneo3476.hateblo.jp/entry/2013/04/03/233738
 TABLE RecommendMenus {
   id: varchar
   title: varchar
-  publication_period: date(掲載期間)
+  start_at: date
+  end_at: date
 }
 
 TABLE AddRecommendMenus {

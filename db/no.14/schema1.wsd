@@ -20,7 +20,7 @@ Entity OrderDetails {
   order_id: varchar<<FK>>
   menu_id: varchar<<FK>>
   number: integer
-  without_wasabi: boolean
+  include_wasabi: boolean
   sum_price: integer
 }
 
