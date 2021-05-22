@@ -1,0 +1,47 @@
+@startuml
+Entity Customers {
+  id: varchar
+  --
+  name: varchar
+  telephone: varchar
+}
+
+Entity Orders {
+  id: varchar
+  --
+  customer_id: varchar<<FK>>
+  sum_price: integer
+  created_at: date
+}
+
+Entity OrderDetails {
+  id: varchar
+  --
+  order_id: varchar<<FK>>
+  menu_id: varchar<<FK>>
+  number: integer
+  include_wasabi: boolean
+  sum_price: integer
+}
+
+Entity Menus {
+  id: varchar
+  --
+  category_id: varchar<<FK>>
+  name: varchar
+  price: integer
+  price_including_tax: integer
+  classification: integer -- (単品: 0, セット: 1)
+}
+
+Entity MenuCategories {
+  id: varchar
+  --
+  name: varchar
+}
+
+Customers ||--o{ Orders
+Orders ||--|{ OrderDetails
+Menus ||--o{ OrderDetails
+MenuCategories ||--o{ Menus
+@enduml
