@@ -1,0 +1,77 @@
+Entity Users {
+  + id: varchar
+  --
+  workspace_id: varchar<<FK>>
+  name: varchar
+  display_name: varchar
+  email: varchar
+  icon_url: varchar
+  created_at: date
+}
+
+Entity SendMessageToChannels {
+  + id: varchar
+  --
+  user_id: varchar<<FK>>
+  channel_id: varchar<<FK>>
+  content: varchar
+  send_at: date
+  thread_message_count: integer -- (スレッドのメッセージ数を表示する)
+}
+note right
+チャネルへのメッセージの投稿
+end note
+
+Entity SendMessageToThreads {
+  + id: varchar
+  --
+  user_id: varchar<<FK>>
+  channel_id: varchar<<FK>>
+  channel_message_id: varchar<<FK>> -- (SendMessageToChannelsのid)
+  content: varchar
+  send_at: date
+}
+note right
+スレッドへのメッセージの投稿
+チャネルでの絞り込み用にチャネルidを持たせる
+end note
+
+Entity Channels {
+  + id: varchar
+  --
+  name: varchar
+}
+
+Entity JoinChannels {
+  + id: varchar
+  --
+  user_id: varchar<<FK>>
+  channel_id: varchar<<FK>>
+  channel_status_id: varchar<<FK>>
+  created_at: date
+}
+note left
+チャネルへの参加イベント
+end note
+
+Entity ChannelStatuses {
+  + id: varchar
+  --
+  status: varchar -- ("star" or "mute" or "default" など)
+}
+
+Entity Workspaces {
+  + id: varchar
+  --
+  name: varchar
+}
+
+Workspaces ||--|| Users
+Users ||--o{ SendMessageToChannels
+SendMessageToChannels }o--|| Channels
+Users ||--o{ SendMessageToThreads
+Channels ||--o{ SendMessageToThreads
+SendMessageToChannels ||--o{ SendMessageToThreads
+Users ||--o{ JoinChannels
+JoinChannels }o--|| Channels
+ChannelStatuses ||--o{ JoinChannels
