@@ -39,6 +39,7 @@ end note
 Entity Channels {
   + id: varchar
   --
+  workspace_id: varchar<<FK>>
   name: varchar
 }
 
@@ -66,7 +67,8 @@ Entity Workspaces {
   name: varchar
 }
 
-Workspaces ||--|| Users
+Workspaces ||--|{ Users
+Workspaces ||--o{ Channels
 Users ||--o{ SendMessageToChannels
 SendMessageToChannels }o--|| Channels
 Users ||--o{ SendMessageToThreads

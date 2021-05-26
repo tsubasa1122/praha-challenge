@@ -140,7 +140,7 @@ TABLE Users {
 
 作成した ER 図はこちらです。
 
-![ER図](./schama1.png)
+![ER図](./schema1.png)
 
 ### 設計のポイント
 
@@ -153,7 +153,7 @@ TABLE Users {
   - 今回の仕様では階層は 2 階層までしか存在しないことと、チャネル一覧では 1 階層目のメッセージしか表示しないこと、メッセージテーブルは肥大化する可能性が大きのでユースケースによって不要になるデータを検索対象に含めたくなかった。
   - 横断検索は最悪 ElasticSearch などに投げれば対応出来そう？だが、スレッドメッセージを分ける作業は辛そう...。
   - メッセージの横断検索はどうするの？
-    - SendMessageToChannels と SendMessageToThreads にそれぞれクエリを投げる。
+    - JoinChannels からユーザーが所属しているチャネルの id を取り出して、SendMessageToChannels と SendMessageToThreads にそれぞれクエリを投げる。
     - send_at 順に並び替えて表示したい場合は UNION して order by send_at すれば対応出来そう。
 
 ### 考えても良いかも系の仕様
