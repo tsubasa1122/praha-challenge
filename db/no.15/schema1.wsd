@@ -43,7 +43,7 @@ Entity Channels {
   name: varchar
 }
 
-Entity JoinChannels {
+Entity BelongToChannels {
   + id: varchar
   --
   user_id: varchar<<FK>>
@@ -74,6 +74,6 @@ SendMessageToChannels }o--|| Channels
 Users ||--o{ SendMessageToThreads
 Channels ||--o{ SendMessageToThreads
 SendMessageToChannels ||--o{ SendMessageToThreads
-Users ||--o{ JoinChannels
-JoinChannels }o--|| Channels
-ChannelStatuses ||--o{ JoinChannels
+Users ||--o{ BelongToChannels
+BelongToChannels }o--|| Channels
+ChannelStatuses ||--o{ BelongToChannels

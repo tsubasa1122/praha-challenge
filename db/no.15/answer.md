@@ -110,7 +110,7 @@ TABLE Channels {
   name: varchar
 }
 
-TABLE JoinChannels {
+TABLE BelongToChannels {
   id: varchar
   user_id: varchar<<FK>>
   channel_id: varchar<<FK>>
@@ -137,6 +137,8 @@ TABLE Users {
   icon_url: varchar
 }
 ```
+
+※ BelongToChannels -> JoinChannels に変更しました。(レビュー会で SQL の JOIN と認識してしまい、分かり辛いと指摘されたため)
 
 作成した ER 図はこちらです。
 
