@@ -1,0 +1,103 @@
+Entity PublishDocuments {
+  + id: varchar
+  --
+  space_id: varchar<<FK>>
+  document_id: varchar<<FK>>
+}
+note top
+ドキュメントの公開イベント
+end note
+
+Entity ArchiveDocuments {
+  + id: varchar
+  --
+  space_id: varchar<<FK>>
+  document_id: varchar<<FK>>
+  created_at: date
+}
+note left
+ドキュメントのアーカイブイベント
+end note
+
+Entity DraftDocuments {
+  + id: varchar
+  --
+  space_id: varchar<<FK>>
+  document_id: varchar<<FK>>
+  changed_by: varchar<<FK>> -- (更新者user_id)
+  title: varchar
+  body: varchar -- タグを丸ごと保存する
+  body_markdown: varchar -- マークダウンを丸ごと保存する
+  created_at: date
+}
+note left
+ドキュメントの下書きイベント
+end note
+
+Entity Users {
+  + id: varchar
+  --
+  site_id: varchar<<FK>>
+  name: varchar
+  email: varchar
+  icon_url: varchar
+}
+
+Entity Documents {
+  + id: varchar
+  --
+  created_by: varchar<<FK>> -- (作成者user_id)
+  depth: integer -- (階層の深さ)
+  created_at: date
+}
+
+Entity DocumentClosures {
+  + id: varchar
+  --
+  ancestor_document_id: varchar<<FK>>
+  descendant_document_id: varchar<<FK>>
+}
+
+Entity DocumentHistories {
+  + id: varchar
+  --
+  document_id: varchar<<FK>>
+  changed_by: varchar<<FK>> -- (更新者user_id)
+  title: varchar
+  body: varchar -- タグを丸ごと保存する
+  body_markdown: varchar -- マークダウンを丸ごと保存する
+  version: varchar -- 変更履歴でバージョンを表示する
+  created_at: date
+}
+
+Entity Spaces {
+  + id: varchar
+  --
+  site_id: varchar<<FK>>
+  created_by: varchar<<FK>> -- (作成者user_id)
+  type: varchar -- (personal or share)
+}
+
+Entity Sites {
+  + id: varchar
+  --
+}
+
+
+Users ||--o{ DocumentHistories
+Documents ||--o{ DocumentHistories
+Documents ||--o{ DocumentClosures
+Documents ||--o{ DocumentClosures
+Users ||--o{ DraftDocuments
+Spaces ||--o{ DraftDocuments
+DraftDocuments |o--|| Documents
+Documents ||--o{ ArchiveDocuments
+Spaces ||--o{ ArchiveDocuments
+Documents ||--|{ Users
+Documents ||--o{ PublishDocuments
+Spaces ||--o{ PublishDocuments
+Users ||--|{ Spaces
+Sites ||--|{ Users
+Sites ||--|{ Spaces
+
+
