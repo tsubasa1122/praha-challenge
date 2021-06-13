@@ -1,0 +1,43 @@
+Entity SetTaskReminders {
+  + id: varchar
+  --
+  user_id: varchar<<FK>>
+  task_id: varchar<<FK>>
+  is_finished: boolean
+  finished_at: date
+}
+note right
+リマインダーの設定イベント
+end note
+Entity NotifyReminders {
+  + id: varchar
+  --
+  user_id: varchar<<FK>>
+  task_id: varchar<<FK>>
+  send_at: date
+}
+note left
+リマインダーの通知イベント
+end note
+Entity Users {
+  + id: varchar
+  --
+  name: varchar
+  display_name: varchar
+}
+
+Entity Tasks {
+  + id: varchar
+  --
+  body: varchar
+  created_by: varchar<<FK>> -- リマインドの作成者(user_id)
+  next_send_at: date
+  cron_interval: varchar -- cronの値を保存する(例: '0 5 * * *')
+  status: integer -- ("active", "canceled", "finished")
+}
+
+Users ||--|{ SetTaskReminders
+Tasks ||--|{ SetTaskReminders
+Users ||--o{ NotifyReminders
+Tasks ||--o{ NotifyReminders
+Users ||--|| Tasks
