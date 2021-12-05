@@ -1,4 +1,7 @@
 - プラベートサブネットに EC2 を作成すると書いてあるが、パブリックサブネットでは...?
+  - プライベートだった。https://prahachallengeseason1.slack.com/archives/C01HY1BA5LG/p1623719384028700
+  - NAT ゲートウェイを使って Nginx をインストールした
+  - https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-nat-gateway.html
 
 ## Nginx を導入する
 
@@ -21,6 +24,12 @@ CentOS だからっぽい
 公式に Amazon Linux の Installation 書いてあった
 http://nginx.org/en/linux_packages.html
 
+インストールする Nginx の設定値を入れる
+
+```shell
+$ sudo vi /etc/yum.repos.d/nginx.repo
+```
+
 Nginx はとりあえず安定版を入れた
 
 ```
@@ -31,6 +40,18 @@ gpgcheck=1
 enabled=1
 gpgkey=https://nginx.org/keys/nginx_signing.key
 module_hotfixes=true
+```
+
+インストール
+
+```shell
+$ sudo yum install nginx
+```
+
+サーバーが立ち上がったら、毎回 Nginx を立ち上げるように
+
+```shell
+$ sudo systemctl enable nginx
 ```
 
 公式を見ながら Install 後、Nginx を立ち上げてみる
@@ -44,7 +65,12 @@ $ systemctl start nginx
 
 [ここ](https://www.nginx.com/blog/setting-up-nginx/#web-server)を参考に html を返すようにした
 
-- いずれかのパブリックサブネットに ALB（アプリケーションロードバランサー）を設置してと書いてあるが、ALB は VPC に設定する感じじゃないのかな？？
+```shell
+$ sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.back
+$ sudo vi /home/public.html
+$ sudo vi /etc/nginx/conf.d/server.conf
+$ sudo nginx -s reload
+```
 
 ### 参考
 
@@ -52,6 +78,12 @@ https://www.nginx.com/blog/setting-up-nginx/
 https://webplus8.com/aws-amazon-linux-os-version/  
 https://weblabo.oscasierra.net/nginx-centos7-install/
 
+- Nginx の location の設定
+  http://www2.matsue-ct.ac.jp/home/kanayama/text/nginx/node36.html
+
 ### メモ
 
 - ALB のヘルスチェックはどんな観点を基準に設定したらいいんだろう？
+- 毎回 GUI でポチポチ環境構築するのシンドイ...
+- いずれかのパブリックサブネットに ALB（アプリケーションロードバランサー）を設置してと書いてあるが、ALB は サブネットを指定して作成できる？
+- ターゲットグループの設定で、root 以外のパスを指定することはできるのかな？
