@@ -57,7 +57,7 @@
   - データをすぐに取り出す可能性がない場合
     - S3 Glacier Deep Archive
 
-参考:
+参考:  
 https://techblog.forgevision.com/entry/2019/02/27/094449  
 https://dev.classmethod.jp/articles/should_i_choice_s3_storage_class/  
 https://aws.amazon.com/jp/s3/storage-classes/
@@ -72,22 +72,60 @@ https://aws.amazon.com/jp/s3/storage-classes/
     - オブジェクトの有効期限を設定することができる
     - 有効期限切れのオブジェクトは自動的に削除される
 
-参考:
+参考:  
 https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/object-lifecycle-mgmt.html
 
 ### 30 日経ったら、もっと安いストレージクラスに移動する
 
 - terraform/aws_s3.tf の`s3_test1`を参照
-- 設定できた ![スクリーンショット](images/image1.png)
+- 設定できた
+- ![スクリーンショット](images/image1.png)
 
 ### 90 日経ったら削除する
 
 - terraform/aws_s3.tf の`s3_test2`を参照
-- 設定できた ![スクリーンショット](images/image2.png)
+- 設定できた
+- ![スクリーンショット](images/image2.png)
 
 ## 課題２（バックアップ）
 
 ### 「バージョニング」と「レプリケーション」の違い
 
+- バージョニング
+
+  - 同じバケット内でオブジェクトの複数のバリアントを保持する手段のこと
+  - バケットに保存されたすべてのオブジェクトのすべてのバージョンを、保存、取得、復元することができます
+    - 誤ってオブジェクトを削除してしまった際に、削除前のバージョンに戻すことでオブジェクトを復元することができる
+  - 無効、有効、停止のステータスがあり、一度有効にすると停止することしかできなくなる
+    - 有効にした間に作成されたバージョニングを保持するため？
+
+- レプリケーション
+
+  - バケット間でオブジェクトを自動で非同期的にコピーする手段のこと
+  - 同じ AWS アカウント が所有することも、異なるアカウントが所有することもできます
+
+- 2 つの違い
+  - バージョニングは同一バケット内でのオブジェクトの可用性を高める方法で、レプリケーションは複数バケットで可用性を高める方法
+    - レプリケーションはコンプライアンス要件として利用される
+
+### レプリケーション
+
+- terraform/aws_s3.tf の`s3_test3`を参照
+- 設定できた
+- ![スクリーンショット](images/image3.png)
+- レプリケーション先にも自動で移動されている
+- ![スクリーンショット](images/image4.png)
+
+### バージョニング
+
+- terraform/aws_s3.tf の`s3_test3`を参照
+- 画像を削除し、バージョンの表示をするとバージョニングされていることが分かる
+- ![スクリーンショット](images/image5.png)
+- 削除マーカーが付いている画像を「完全に削除する」と画像が復元される
+- ![スクリーンショット](images/image6.png)
+
 参考:
-https://techblog.szksh.cloud/terraform-getting-started/
+https://techblog.szksh.cloud/terraform-getting-started/  
+https://dev.classmethod.jp/articles/3minutes-s3-versioning-lifecycle/  
+https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/Versioning.html  
+https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/replication.html

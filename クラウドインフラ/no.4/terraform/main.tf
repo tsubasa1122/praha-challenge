@@ -5,3 +5,8 @@ terraform {
 provider "aws" {
   region = var.provider_region
 }
+
+provider "aws" {
+  alias  = "us"
+  region = var.provider_region_us
+}
