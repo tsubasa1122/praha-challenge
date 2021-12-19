@@ -36,13 +36,23 @@ https://www.p.uliza.jp/2018/12/19/what-is-cdn/
 
 ## 課題２
 
-実際にCDNを使って画像へのアクセスを改善してみましょう
-日本から遠いリージョン（US East (Ohio) us-east-2など）のS3バケットに、任意の画像を保存してください
-S3のオブジェクトに発行されるURLを通じて画像をブラウザで表示できることを確認してください
-https://{{バケットの名前}}.s3.{{リージョンの名前}}.amazonaws.com/{{ファイル名}}
-このようなURLが発行されるはずです
-CloudFrontとS3を接続して、S3にアップロードした画像をCloudFront経由で取得できるようにしてください
-CloudFrontのURLから画像を取得できるようにしてください
-S3から画像を取得した時と、CloudFront経由で画像を取得した際、リクエスト/レスポンスの所要時間を比較してみましょう
-ヒント：Chromeの開発者ツールの「ネットワーク」タブを使うと良いかもしれません
-ヒント：ブラウザキャッシュが誤って効かないように気をつけてください
+`terraform`以下に設定値を記載
+`us-east-2`にバケットを作成した
+
+### s3のバケットのURLを直接叩いた際のレスポンス
+- レスポンス速度は `120ms ~ 130ms`辺りだった
+- ![スクリーンショット](images/response_time_via_s3.png)
+
+- CloudFrontから配信され、cacheがhitしていることが分かる
+- ![スクリーンショット](images/s3.png)
+
+
+### CloudFront経由で画像を取得した際のレスポンス
+
+- レスポンス速度は `8ms ~ 18ms`辺りになった
+- ![スクリーンショット](images/response_time_via_cloudfront.png)
+
+- CloudFrontから配信され、cacheがhitしていることが分かる
+- ![スクリーンショット](images/cloudfront.png)
+
+- `cache-control: max-age=0`で設定してしまったので、時間を伸ばせばもっと高速化できるかも？
