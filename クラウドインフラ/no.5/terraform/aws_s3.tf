@@ -24,7 +24,6 @@ data "aws_iam_policy_document" "s3_bucket_policy" {
 
     ## アクセス先の設定。
     resources = [
-      "arn:aws:s3:::praha-challenge-s3-test",  ## praha-challenge-s3-testバケットへのアクセス。
       "arn:aws:s3:::praha-challenge-s3-test/*" ## praha-challenge-s3-testバケット配下へのアクセス。
     ]
   }
