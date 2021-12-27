@@ -1,3 +1,5 @@
+# 課題1
+
 ## Atomic Designとは？
 - パーツ・コンポーネント単位で定義していく UI デザイン手法のこと
 
@@ -79,3 +81,18 @@ https://codesandbox.io/s/staging-voice-qj52e?file=/src/App.tsx
 参考:
 https://ja.reactjs.org/docs/hooks-intro.html#classes-confuse-both-people-and-machines  
 りあクト！ TypeScriptで始めるつらくないReact開発 第3.1版　
+
+# 課題2
+
+- Atomic DesignのpageとNext.jsのpagesの責務はどう分けた方が良いんだろう？
+- tailwind is 楽しい!!
+  - 愚直にクラス名を付与するようにするとカオスになるかも...
+- StorybookでTailwindが読み込まれなかったので、下記の記事を参考にした
+  - https://fwywd.com/tech/next-storybook-install
+- ESlintの設定
+  - https://fwywd.com/tech/next-eslint-prettier
+
+参考:
+https://storybook.js.org/blog/get-started-with-storybook-and-next-js/ 
+https://dev.classmethod.jp/articles/tried-to-add-storybook-to-nextjs-project/  
+https://tailwindcss.com/docs/guides/nextjs   

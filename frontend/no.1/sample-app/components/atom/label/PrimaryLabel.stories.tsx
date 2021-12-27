@@ -1,5 +1,5 @@
-import { PrimaryLabel, Props } from './PrimaryLabel';
 import { Story, Meta } from '@storybook/react/types-6-0';
+import { PrimaryLabel, Props } from './PrimaryLabel';
 
 export default {
   title: 'Label',
