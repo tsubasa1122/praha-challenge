@@ -14,22 +14,40 @@ const props = {
       name: 'Alex John',
     },
     {
-      publishedAt: 'Jun 1, 2020',
-      label: 'Laravel',
-      title: 'Build Your New Idea with Laravel Freamwork.',
+      publishedAt: 'mar 4, 2019',
+      label: 'Design',
+      title: 'Accessibility tools for designers and developers',
       content:
         'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!',
       iconUrl: 'https://source.unsplash.com/random',
-      name: 'Alex John',
+      name: 'Jane Doe',
     },
     {
-      publishedAt: 'Jun 1, 2020',
-      label: 'Laravel',
-      title: 'Build Your New Idea with Laravel Freamwork.',
+      publishedAt: 'Feb 14, 2019',
+      label: 'PHP',
+      title: 'PHP: Array to Map',
       content:
         'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!',
       iconUrl: 'https://source.unsplash.com/random',
-      name: 'Alex John',
+      name: 'Lisa Way',
+    },
+    {
+      publishedAt: 'Dec 23, 2018',
+      label: 'Django',
+      title: 'Django Dashboard - Learn by Coding',
+      content:
+        'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!',
+      iconUrl: 'https://source.unsplash.com/random',
+      name: 'Steve Matt',
+    },
+    {
+      publishedAt: 'Mar 10, 2018',
+      label: 'Testing',
+      title: 'TDD Frist',
+      content:
+        'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!',
+      iconUrl: 'https://source.unsplash.com/random',
+      name: 'Khatab Wedaa',
     },
   ],
   totalPage: 3,
@@ -42,8 +60,23 @@ const props = {
     },
     {
       iconUrl: 'https://source.unsplash.com/random',
-      name: 'Alex John',
-      publishedAt: 'Created 23 Posts',
+      name: 'Jane Doe',
+      publishedAt: 'Created 52 Posts',
+    },
+    {
+      iconUrl: 'https://source.unsplash.com/random',
+      name: 'Lisa Way',
+      publishedAt: 'Created 73 Posts',
+    },
+    {
+      iconUrl: 'https://source.unsplash.com/random',
+      name: 'Steve Matt',
+      publishedAt: 'Created 245 Posts',
+    },
+    {
+      iconUrl: 'https://source.unsplash.com/random',
+      name: 'Khatab Wedaa',
+      publishedAt: 'Created 332 Posts',
     },
   ],
   categories: [
@@ -52,6 +85,18 @@ const props = {
     },
     {
       name: 'Laravel',
+    },
+    {
+      name: 'Vue',
+    },
+    {
+      name: 'Design',
+    },
+    {
+      name: 'Django',
+    },
+    {
+      name: 'PHP',
     },
   ],
   recentPost: {

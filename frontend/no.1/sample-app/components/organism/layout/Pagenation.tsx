@@ -53,7 +53,7 @@ export const Pagenation: VFC<Props> = ({ totalPage, currentPage }) => {
                 : 'text-gray-700 hover:bg-blue-500 hover:text-white'
             }`}
           >
-            next
+            Next
           </a>
         </>
       )}
