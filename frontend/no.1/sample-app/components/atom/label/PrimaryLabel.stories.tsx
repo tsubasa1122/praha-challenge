@@ -10,5 +10,5 @@ const Template: Story<Props> = (args) => <PrimaryLabel {...args} />;
 
 export const DefaultLabel = Template.bind({});
 DefaultLabel.args = {
-  children: 'Larabel',
+  children: 'Laravel',
 };

@@ -10,6 +10,6 @@ const Template: Story<Props> = (args) => <Pagenation {...args} />;
 
 export const DefaultPagenation = Template.bind({});
 DefaultPagenation.args = {
-  total_page: 3,
-  current_page: 1,
+  totalPage: 3,
+  currentPage: 1,
 };

@@ -1,26 +1,26 @@
 import { VFC } from 'react';
 
 export type Props = {
-  total_page: number;
-  current_page: number;
+  totalPage: number;
+  currentPage: number;
 };
 
-export const Pagenation: VFC<Props> = ({ total_page, current_page }) => {
+export const Pagenation: VFC<Props> = ({ totalPage, currentPage }) => {
   return (
     <div className='flex'>
-      {total_page === 1 ? (
+      {totalPage === 1 ? (
         <a
           href='#'
           className='px-3 py-2 mx-1 font-medium text-gray-700 bg-white rounded-md hover:bg-blue-500 hover:text-white'
         >
-          {total_page}
+          {totalPage}
         </a>
       ) : (
         <>
           <a
             href='#'
             className={`px-3 py-2 mx-1 font-medium bg-white rounded-md ${
-              current_page === 1
+              currentPage === 1
                 ? 'text-gray-500 cursor-not-allowed'
                 : 'text-gray-700 hover:bg-blue-500 hover:text-white'
             }`}
@@ -31,24 +31,24 @@ export const Pagenation: VFC<Props> = ({ total_page, current_page }) => {
             href='#'
             className='px-3 py-2 mx-1 font-medium text-gray-700 bg-white rounded-md hover:bg-blue-500 hover:text-white'
           >
-            {current_page}
+            {currentPage}
           </a>
           <a
             href='#'
             className='px-3 py-2 mx-1 font-medium text-gray-700 bg-white rounded-md hover:bg-blue-500 hover:text-white'
           >
-            {current_page + 1}
+            {currentPage + 1}
           </a>
           <a
             href='#'
             className='px-3 py-2 mx-1 font-medium text-gray-700 bg-white rounded-md hover:bg-blue-500 hover:text-white'
           >
-            {current_page + 2}
+            {currentPage + 2}
           </a>
           <a
             href='#'
             className={`px-3 py-2 mx-1 font-medium bg-white rounded-md ${
-              current_page === total_page
+              currentPage === totalPage
                 ? 'text-gray-500 cursor-not-allowed'
                 : 'text-gray-700 hover:bg-blue-500 hover:text-white'
             }`}
