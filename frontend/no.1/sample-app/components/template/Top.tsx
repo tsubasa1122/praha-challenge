@@ -51,6 +51,7 @@ export const Top: VFC<Props> = (props) => {
               <Pagenation totalPage={totalPage} currentPage={currentPage} />
             </div>
           </div>
+          {/* lg:block 1024px以上で表示 */}
           <div className='hidden w-4/12 -mx-8 lg:block'>
             <div className='px-8'>
               <h2 className='mb-4 text-xl font-bold text-gray-700'>Authors</h2>
