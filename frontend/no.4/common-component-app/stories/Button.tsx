@@ -1,48 +1,26 @@
-import React from 'react';
+import { VFC } from 'react';
 import './button.css';
 
-interface ButtonProps {
-  /**
-   * Is this the principal call to action on the page?
-   */
-  primary?: boolean;
-  /**
-   * What background color to use
-   */
-  backgroundColor?: string;
-  /**
-   * How large should the button be?
-   */
+interface Props {
+  children: string;
+  color?: 'red' | 'blue' | 'green';
   size?: 'small' | 'medium' | 'large';
-  /**
-   * Button contents
-   */
-  label: string;
-  /**
-   * Optional click handler
-   */
+  disabled: boolean;
   onClick?: () => void;
 }
 
-/**
- * Primary UI component for user interaction
- */
-export const Button = ({
-  primary = false,
-  size = 'medium',
-  backgroundColor,
-  label,
-  ...props
-}: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+export const Button: VFC<Props> = (props) => {
+  const { children, color, size = 'small', disabled = false, onClick } = props;
+
   return (
     <button
-      type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={{ backgroundColor }}
-      {...props}
+      type='button'
+      className={`button button--${size}`}
+      style={{ backgroundColor: color }}
+      onClick={onClick}
+      disabled={disabled}
     >
-      {label}
+      {children}
     </button>
   );
 };
