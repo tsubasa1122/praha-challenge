@@ -27,7 +27,17 @@
     "babel-loader": "^8.2.3",
     "eslint": "8.5.0",
     "eslint-config-next": "12.0.7",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-storybook": "^0.5.5",
+    "prettier": "^2.5.1",
     "typescript": "4.5.4"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "printWidth": 100
   }
 }
