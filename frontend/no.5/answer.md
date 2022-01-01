@@ -49,6 +49,11 @@ https://codesandbox.io/s/damp-fog-2ro29
 
 - ラップしたコンポーネントを作る分、コンポーネント数が増えることで props リレーも増える
 
+**tailwindcss のページをリファクタリング**
+
+- 前回の課題で、`page = Container`, `template = Presentational`の意識で作っていたのでやることがなかった...。認識あっているのだろうか？(page と template の役割の理解が足りてないかも？)
+  - そもそもロジックがほとんどないので、大きくリファクタする部分が見つけられなかった...
+
 参考:
 https://www.nochitoku-it.com/containr-1
 
