@@ -38,21 +38,26 @@ https://morioh.com/p/83538caf83ba
 
 # 課題 2
 
-こちらのプロジェクトを codesandbox 上で fork して、SomeComponent（自身がレンダリングされた回数を表示するコンポーネント）を完成させてください
-ヒント：コンポーネントの中に count などのカウンターを持ち、useEffect でレンダリングの度にカウンターを加算すると良いでしょう
-ヒント：カウンターを useState で作成してレンダリングの度に useEffect から更新するようにすると、無限ループになってしまうでしょう。なぜでしょうか？解決するには「useRef」が役立つかもしれません！
-上記のコンポーネントを更に改善して「someFlag が true になった時だけ加算する」ようにしてみましょう
-ボタンを押しても 2 回に 1 回しか加算されなくなったら成功です
+SomeComponent を完成させた
+https://codesandbox.io/s/use-effect-demo-forked-34sl4?file=/src/some-component.js
+
+- コンポーネント内で定義した state(count)を useEffect 内で更新すると、レンダリングする度に count の値が変わるので、再びレンダリングされてしまい、無限ループ状態になってしまう
+  - state は更新しても、再レンダリングさせたくない場合は useRef を使用する
+    - `useRef は中身が変更になってもそのことを通知しない`
+
+参照:
+https://zenn.dev/luvmini511/articles/7e1afa2ca8bdc8  
+https://ja.reactjs.org/docs/hooks-reference.html#useref
 
 # 課題 3
 
-先ほどのプロジェクトに含まれていた FetchComponent を完成させてください
-FetchComponent の中で GitHub の API と通信して、特定のレポジトリのスター数を描画してみましょう
-このレポジトリの star 数を取得して表示するコンポーネントを作成してください
-ただし再レンダリングの度に API との通信が発生しないように気をつけましょう！初回表示の時に一度だけ通信が発生するようにしてください
-ヒント：codesandbox だと開発者コンソールの network タブが正しく動かないことがあるようなので、console.log で確認する程度で問題ありません
-ヒント：https://api.github.com/repos/facebook/reactを呼び出してみましょう！fetchを使うと良いかもしれません
-ヒント：再レンダリングの度にリクエストが飛ばないようにするためには、useEffect の第 2 引数に何かを指定する必要があるはずです！
+fetch-component を完成させた
+https://codesandbox.io/s/use-effect-demo-forked-34sl4?file=/src/fetch-component.js
+
+- abort も実装してみた
+
+参考:
+https://ja.javascript.info/fetch-abort
 
 # 課題 4
 
