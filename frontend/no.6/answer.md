@@ -62,3 +62,146 @@ https://ja.javascript.info/fetch-abort
 # 課題 4
 
 useEffect に関するクイズを作成してください
+
+No.1
+
+useEffect で外部 API から取得したデータをセットする処理を行う場合、クリーンアップ処理は具体的にはどのような対応方法があるでしょうか？
+(※課題 3 の問題にクリーンアップ処理を実装するイメージです)
+
+```jsx
+import { useEffect, useState } from "react";
+const REACT_REPOSITORY_API_URL = "https://api.github.com/repos/facebook/react";
+
+export const FetchComponent = () => {
+  const [data, setData] = useState({
+    subscribers: 0,
+    stars: 0,
+  });
+
+  const fetchReactRepositoryData = async () => {
+    const response = await fetch(REACT_REPOSITORY_API_URL);
+    const newData = await response.json();
+    setData({
+      subscribers: newData.subscribers_count,
+      stars: newData.stargazers_count,
+    });
+  };
+
+  useEffect(() => {
+    fetchReactRepositoryData();
+    // ここにクリーンアップ処理を実装する
+    return () => {};
+  }, []);
+
+  return (
+    <div>
+      <p>ここにReactのGitHubレポジトリに付いたスターの数を表示してみよう</p>
+      <p>{data.stars} stars</p>
+    </div>
+  );
+};
+```
+
+<details><summary>回答</summary>
+
+**boolean 値を使って、true の時だけ API から取得したデータを setState する(データ取得自体は行う)**
+
+```jsx
+import { useEffect, useState } from "react";
+const REACT_REPOSITORY_API_URL = "https://api.github.com/repos/facebook/react";
+
+export const FetchComponent = () => {
+  const [data, setData] = useState({
+    subscribers: 0,
+    stars: 0,
+  });
+
+  const fetchReactRepositoryData = async (active) => {
+    const response = await fetch(REACT_REPOSITORY_API_URL);
+    const newData = await response.json();
+    if (active) {
+      setData({
+        subscribers: newData.subscribers_count,
+        stars: newData.stargazers_count,
+      });
+    }
+  };
+
+  useEffect(() => {
+    let active = true;
+    fetchReactRepositoryData(active);
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  return (
+    <div>
+      <p>ここにReactのGitHubレポジトリに付いたスターの数を表示してみよう</p>
+      <p>{data.stars} stars</p>
+    </div>
+  );
+};
+```
+
+**AbortController を使用して、API リクエストをキャンセルする**
+
+```jsx
+import { useEffect, useState } from "react";
+const REACT_REPOSITORY_API_URL = "https://api.github.com/repos/facebook/react";
+
+export const FetchComponent = () => {
+  const [data, setData] = useState({
+    subscribers: 0,
+    stars: 0,
+  });
+
+  const fetchReactRepositoryData = async (abortController) => {
+    // APIリクエストにabortControllerのsignalを渡す
+    const response = await fetch(REACT_REPOSITORY_API_URL, {
+      signal: abortController.signal,
+    });
+    const newData = await response.json();
+    setData({
+      subscribers: newData.subscribers_count,
+      stars: newData.stargazers_count,
+    });
+  };
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    fetchReactRepositoryData(abortController);
+
+    // abort関数を用いてAPIリクエストをキャンセルする
+    return () => {
+      abortController.abort();
+    };
+  }, []);
+
+  return (
+    <div>
+      <p>ここにReactのGitHubレポジトリに付いたスターの数を表示してみよう</p>
+      <p>{data.stars} stars</p>
+    </div>
+  );
+};
+```
+
+</details>
+
+No.2
+
+`useEffect`と`useLayoutEffect`の違いはなんでしょうか？
+
+<details><summary>回答</summary>
+
+- `useEffect`は DOM が描画された後に副作用が実行されるが、`useLayoutEffect`は DOM の変更があった後で同期的に副作用が呼び出される
+  - DOM のレイアウトを元に実行する処理がある場合は`useLayoutEffect`を使用する
+    - 同期的に実行されるので、パフォーマンスを注意する必要がある
+  - SPA でよくみられるデータ取得前のレイアウトが見えてしまう原因は`useEffect`が DOM の描画前に実行されるため
+
+参考:
+https://ja.reactjs.org/docs/hooks-reference.html#uselayouteffect
+
+</details>
