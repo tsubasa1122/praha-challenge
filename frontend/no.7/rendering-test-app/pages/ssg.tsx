@@ -1,9 +1,9 @@
-import { VFC } from "react";
+import type { NextPage } from "next";
 // 本来ならCSSをちゃんと分離したい
 import styles from "../styles/Home.module.css";
 import { FetchComponent } from "./FetchComponent";
 
-const Ssg: VFC = () => {
+const Ssg: NextPage = () => {
   return (
     <>
       <main className={styles.main}>
