@@ -60,11 +60,6 @@ https://zenn.dev/akino/articles/78479998efef55
 
 # 課題 2
 
-yarn create next-app をターミナルで実行して、Next.js のアプリケーションを新規作成しましょう
-yarn dev を実行すると、Welcome to Next.js!と表示されるデモページが表示されるはずです
-「useEffect」の課題でこのレポジトリの star 数を取得して表示するコンポーネントを作成したはずです
-上記コンポーネントを Next.js のアプリケーションに実装してください
-Welcome to Next.js!の下にレポジトリのスター数が表示されていれば OK です
 ここからは SSR と SSG 毎にデータの取得方法を変えてみましょう
 SSR
 上記ページ（Welcome to Next.js と表示されているページ）をコピーして、別の URL パスでアクセスできるようにしておきましょう（pages/ssr.js など）
