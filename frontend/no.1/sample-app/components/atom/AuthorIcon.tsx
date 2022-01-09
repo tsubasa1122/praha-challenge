@@ -12,13 +12,13 @@ export const AuthorIcon: VFC<Props> = ({ iconUrl, name }) => {
     <>
       <a href='#' className='flex items-center'>
         {/* Imageに直接layoutを指定しても動かないのでstyleをラップする https://stackoverflow.com/questions/65527407/next-image-not-taking-class-properties */}
-        <div className='mx-4 flex items-center'>
+        <div className='hidden mx-4 sm:flex items-center'>
           <Image
             src={iconUrl}
             alt='avator'
             width={40}
             height={40}
-            className='hidden object-cover w-10 h-10 rounded-full sm:block'
+            className='object-cover w-10 h-10 rounded-full sm:block'
           />
         </div>
         <p className='font-bold text-gray-700 hover:underline'>{name}</p>
