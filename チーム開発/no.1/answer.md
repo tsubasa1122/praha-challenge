@@ -39,9 +39,12 @@
     - 地味に嬉しい
     - https://eslint.org/docs/rules/comma-spacing
 
-ESLint のルールで揉めないよう、規定の config を読み込む手段もあります。例えば airbnb が提供している ESLint の config は npm パッケージとして提供されています
-https://www.npmjs.com/package/eslint-config-airbnb
-この config を読み込んで、適当なプロジェクトで lint をかけてみましょう
+### airbnb の lint を入れてみる
+
+- `/lint-sample-app`に create-react-app で React のサンプルアプリを作って、ESlint を導入してみた
+  ESLint のルールで揉めないよう、規定の config を読み込む手段もあります。例えば airbnb が提供している ESLint の config は npm パッケージとして提供されています
+  https://www.npmjs.com/package/eslint-config-airbnb
+  この config を読み込んで、適当なプロジェクトで lint をかけてみましょう
 
 # 課題 2（実装）
 
