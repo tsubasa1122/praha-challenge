@@ -43,6 +43,8 @@
 
 - `/lint-sample-app`に create-react-app で React のサンプルアプリを作って、ESlint を導入してみた
 
+  - ただ create-react-app しただけ状態
+
 - ESlint を実行したら下記のようにエラーがたくさん出た
 
 ```
