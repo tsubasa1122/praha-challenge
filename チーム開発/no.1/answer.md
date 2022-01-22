@@ -42,13 +42,43 @@
 ### airbnb の lint を入れてみる
 
 - `/lint-sample-app`に create-react-app で React のサンプルアプリを作って、ESlint を導入してみた
-  ESLint のルールで揉めないよう、規定の config を読み込む手段もあります。例えば airbnb が提供している ESLint の config は npm パッケージとして提供されています
-  https://www.npmjs.com/package/eslint-config-airbnb
-  この config を読み込んで、適当なプロジェクトで lint をかけてみましょう
+
+- ESlint を実行したら下記のようにエラーがたくさん出た
+
+```
+$ eslint src/**
+
+/Users/nakanot/Desktop/plactice/praha-challenge/チーム開発/no.1/lint-sample-app/src/App.css
+  1:0  error  Parsing error: Unexpected token (1:0)
+
+/Users/nakanot/Desktop/plactice/praha-challenge/チーム開発/no.1/lint-sample-app/src/App.js
+   5:5   error  'React' must be in scope when using JSX        react/react-in-jsx-scope
+   5:5   error  JSX not allowed in files with extension '.js'  react/jsx-filename-extension
+   6:7   error  'React' must be in scope when using JSX        react/react-in-jsx-scope
+   7:9   error  'React' must be in scope when using JSX        react/react-in-jsx-scope
+  10:11  error  'React' must be in scope when using JSX        react/react-in-jsx-scope
+  14:9   error  'React' must be in scope when using JSX        react/react-in-jsx-scope
+
+/Users/nakanot/Desktop/plactice/praha-challenge/チーム開発/no.1/lint-sample-app/src/index.css
+  1:4  error  Parsing error: Missing semicolon. (1:4)
+
+/Users/nakanot/Desktop/plactice/praha-challenge/チーム開発/no.1/lint-sample-app/src/index.js
+  5:29  error  Unable to resolve path to module './reportWebVitals'  import/no-unresolved
+  5:29  error  Missing file extension for "./reportWebVitals"        import/extensions
+  8:3   error  JSX not allowed in files with extension '.js'         react/jsx-filename-extension
+
+✖ 11 problems (11 errors, 0 warnings)
+```
 
 # 課題 2（実装）
 
-ローカル環境で commit を行う際に lint を実行して、もし lint エラーがある場合は commit を禁止するような pre-commit hook を作成してください
-言語は node.js でお願いいたします
-ヒント：node.js を使ったプロジェクトだと husky をよく見かけます！
-こうしたローカル環境での pre-commit で、ある程度の品質は担保できますが、チーム開発をする際、これだけで十分でしょうか？ローカル環境での pre-commit hook には、どんな問題点があるでしょうか？
+- husky を導入してみた
+- https://typicode.github.io/husky/#/?id=automatic-recommendedのコマンド一発で出来た
+- モノレポじゃなかったので、テストのために一時的に`git init`した
+
+- ローカル環境での pre-commit の問題点
+  - チームメンバーの環境に依存してしまうため、環境によっては pre-commit が正しく動作しない場合がある
+  - たとえば、VScode の GUI コミットで動かない不具合が過去にあった
+    - https://zenn.dev/nishinama/articles/e1095e7f2e50726c5319
+  - `--no-verify`簡単に実行を無視できるので品質を担保することができない
+    - 一旦コミットする対応ができないので、TDD やモブプロなどと相性が悪い
