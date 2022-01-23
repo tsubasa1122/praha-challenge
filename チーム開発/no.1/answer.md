@@ -43,9 +43,10 @@
 
 - `/lint-sample-app`に create-react-app で React のサンプルアプリを作って、ESlint を導入してみた
 
-  - ただ create-react-app しただけ状態
+  - ただ create-react-app しただけの状態
 
 - ESlint を実行したら下記のようにエラーがたくさん出た
+  - `react/react-in-jsx-scope`いらないかも？
 
 ```
 $ eslint src/**
@@ -74,7 +75,7 @@ $ eslint src/**
 
 # 課題 2（実装）
 
-- husky を導入してみた
+- `/lint-sample-app`に husky を導入してみた
 - https://typicode.github.io/husky/#/?id=automatic-recommendedのコマンド一発で出来た
 - モノレポじゃなかったので、テストのために一時的に`git init`した
 
