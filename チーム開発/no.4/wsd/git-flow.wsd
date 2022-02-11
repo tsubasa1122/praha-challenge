@@ -1,0 +1,16 @@
+@startuml
+Master -> hotfix: リリース後にバグがあり、修正可能であればhotfixで対応
+Master <- hotfix: Masterにマージ
+hotfix -> develop: developに修正を取り込む
+Master -> develop: Masterから開発用のbranchを作る(※開発の最初だけ、この作業が発生する)
+develop -> feature1: feature用のbranchを切って新規機能の開発スタート
+develop -> feature2: feature用のbranchを切って新規機能の開発スタート
+feature1 -> feature1: 開発&Pull Request作成
+feature2 -> feature2: 開発&Pull Request作成
+develop <- feature1: developにマージ
+”release branches” <- develop: リリース用のブランチ作成
+”release branches” -> ”release branches”: バグがあればhotfixで修正する
+Master <- ”release branches”: Masterにマージ&リリース
+”release branches” -> develop: release内容をdevelopに取り込む
+develop -> feature2: 最新のdevelopを取り込む
+@enduml
