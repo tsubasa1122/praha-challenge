@@ -1,0 +1,8 @@
+@startuml
+feature1 <- Master: branchを切って開発スタート
+feature1 <- feature1: 開発&Pull Request作成
+feature1 -> Master: Masterにマージ&リリース
+Master -> feature2: branchを切って開発スタート
+feature2 -> feature2: 開発&Pull Request作成
+Master <- feature2: Masterにマージ&リリース
+@enduml
