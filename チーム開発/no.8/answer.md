@@ -91,8 +91,7 @@ https://knowledge.sakura.ad.jp/13265/
 
 # 課題 2（実装）
 
-「特大課題」で作成したプラハチャレンジのアプリケーションを Docker 化してみましょう
-docker run && docker start すればアプリケーションが立ち上がるような Dockerfile を作成してください
-完成したらコンテナを立ち上げて curl などでリクエストを送り、正しくレスポンスが返されることを確認してください
-上記 Dockerfile を元にアプリケーションが docker-compose で立ち上がるよう、docker-compose.yml ファイルを作成してください
-完成したらコンテナを立ち上げて curl などでリクエストを送り、正しくレスポンスが返されることを確認してください
+### praha-challenge の DDD 課題を Docker 化する
+
+- 下記の PR にて、対応しました
+  https://github.com/tsubasa1122/praha-challenge-ddd/pull/8
