@@ -95,3 +95,9 @@ https://knowledge.sakura.ad.jp/13265/
 
 - 下記の PR にて、対応しました
   https://github.com/tsubasa1122/praha-challenge-ddd/pull/8
+
+### メモ
+
+- dockerignore の設定確認方法
+  - https://jablogs.com/detail/69302
+- prisma の設定ファイルも volume に入れても良いかも？
