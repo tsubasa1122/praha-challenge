@@ -101,3 +101,6 @@ https://knowledge.sakura.ad.jp/13265/
 - dockerignore の設定確認方法
   - https://jablogs.com/detail/69302
 - prisma の設定ファイルも volume に入れても良いかも？
+- コンテナ経由だと DB への接続方法が変わるっぽい
+  - https://qiita.com/rebi/items/e9625cedf0d41d1cfa28#%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%A8%E3%81%AE%E9%81%AD%E9%81%87
+  - https://qiita.com/mm36/items/a743a831fd5cd4324907
