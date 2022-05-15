@@ -10,7 +10,7 @@ User/{userID} ... ユーザーのマスター
   ]
 
 Question/{questionID} ... 課題のマスター
-  -- userInfo (string)  ... 課題のタイトル
+  -- title (string)  ... 課題のタイトル
   -- description (string) ... 課題の詳細
 ```
 
